@@ -1,25 +1,43 @@
-test TCIT
-Nombre: Ricardo Jimenez
+# Test TCIT
 
-1. Clonar el repositorio 
+**Nombre:** Ricardo Jiménez
 
+---
 
-https://github.com/ricjimenezcl/test-tcit.git  (Rama master)
+## 1. Clonar el repositorio
 
-2. Instalar dependencias
+```bash
+git clone https://github.com/ricjimenezcl/test-tcit.git
+cd test-tcit  # Rama: master
+```
 
-# Backend (desde la raíz del proyecto)
+---
+
+## 2. Instalar dependencias
+
+### Backend
+
+```bash
 cd backend
 npm install
+```
 
-# Frontend (desde la raíz del proyecto)
+### Frontend
+
+```bash
 cd ../frontend
 npm install
+```
 
-3. Configurar variables de entorno
+---
 
-Crea un archivo .env en la raíz del backend:
+## 3. Configurar variables de entorno
 
+### Backend
+
+Crea un archivo `.env` en la raíz del backend con el siguiente contenido:
+
+```env
 # ======================================
 # CONFIGURACIÓN GENERAL
 # ======================================
@@ -47,20 +65,26 @@ CORS_METHODS=GET,POST,DELETE
 # ======================================
 LOG_LEVEL=debug
 SQL_LOGGING=true
+```
 
+### Frontend
 
-Crea un archivo .env en la raíz del frontend:
+Crea un archivo `.env` en la raíz del frontend con el siguiente contenido:
 
+```env
 # ======================================
 # CONFIGURACIÓN GENERAL
 # ======================================
 VITE_API_URL=http://localhost:5000/api/posts
+```
 
+---
 
+## 4. Configuración de PostgreSQL
 
-4. Configuración de PostgreSQL:
- crear bd tcit_dev
+Crear la base de datos `tcit_dev`:
 
+```sql
 CREATE DATABASE tcit_dev
     WITH 
     OWNER = postgres  
@@ -69,7 +93,11 @@ CREATE DATABASE tcit_dev
     LC_CTYPE = 'en_US.UTF-8'
     TABLESPACE = pg_default
     CONNECTION LIMIT = -1;
-	
+```
+
+Crear la tabla `posts`:
+
+```sql
 CREATE TABLE posts (
     id serial PRIMARY KEY,
     name varchar(255) NOT NULL,
@@ -77,29 +105,41 @@ CREATE TABLE posts (
     updated_at timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
     created_at timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+```
 
+---
 
+## 5. Ejecutar migraciones
 
-5. Ejecutar migraciones:
-
+```bash
 cd backend
-
 npx sequelize-cli db:migrate
+```
 
+---
 
-6. Ejecutar el Proyecto
+## 6. Ejecutar el Proyecto
 
+### Backend
+
+```bash
 cd backend
 npm run dev
+```
 
+### Frontend
+
+```bash
 cd frontend
 npm run dev
+```
 
+---
 
-endpoint
+## Endpoints
 
-GET http://localhost:5000/api/posts - Listar todos los posts
+- `GET http://localhost:5000/api/posts` — Listar todos los posts  
+- `POST http://localhost:5000/api/posts` — Crear nuevo post  
+- `DELETE http://localhost:5000/api/posts/:id` — Eliminar post
 
-POST http://localhost:5000/api/posts - Crear nuevo post
-
-DELETE http://localhost:5000/api/posts/:id - Eliminar post
+---
