@@ -4,6 +4,8 @@ const Post = require('./post');
 
 const sequelize = new Sequelize(config.development);
 
+console.log('Connecting to the database...',config.development);
+
 const models = {
   Post: Post(sequelize, Sequelize)
 };
